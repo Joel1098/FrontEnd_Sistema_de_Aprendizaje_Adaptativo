@@ -28,19 +28,22 @@ const CrearUnidad = () => {
 
   return (
     <div>
-      <h1>Crear Unidad de Aprendizaje</h1>
+      <h1 className="font-bold">Crear Unidad de Aprendizaje</h1>
+      <br></br>
       <input
+        className="border-4 border-b-cyan-950 box-border rounded-sm "
         type="text"
         placeholder="Nombre"
         value={nombre}
         onChange={(e) => setNombre(e.target.value)}
-      />
+      /><br></br>
       <textarea
+      className="field-sizing-content w-2xs border-2 border-black rounded-sm"
         placeholder="Descripción"
         value={descripcion}
         onChange={(e) => setDescripcion(e.target.value)}
-      />
-      <button onClick={crearUnidadDeAprendizaje}>Crear</button>
+      /><br></br>
+      <button className="cursor-pointer bg-blue-500 rounded-sm text-white text-5xl" onClick={crearUnidadDeAprendizaje}>Crear</button>
 
       {unidadCreada && (
         <div>
