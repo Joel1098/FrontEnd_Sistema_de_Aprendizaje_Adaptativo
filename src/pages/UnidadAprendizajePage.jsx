@@ -1,59 +1,41 @@
-import { useState } from 'react';
-import API_URL from '../config/apiConfiguration'; // Asegúrate de que tu API_URL esté configurado correctamente
+"use client";
 
-const CrearUnidad = () => {
-  const [nombre, setNombre] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [unidadCreada, setUnidadCreada] = useState(null);
+import ContentHeader from "./ContentHeader";
+import CreateForm from "./CreateForm";
+import Sidebar from "./Sidebar";
 
-  // Obtén el usuarioId desde el contexto o desde localStorage
-  const usuarioId = localStorage.getItem('usuarioId') || 1; // Aquí se asume que el usuarioId ya está guardado
-
-  const crearUnidadDeAprendizaje = async () => {
-    const nuevaUnidad = {
-      nombre,
-      descripcion,
-      usuarioId, // Usamos el usuarioId que ya tenemos en el frontend
-    };
-
-    try {
-      const response = await API_URL.post('/api/unidades-de-aprendizaje/crear', nuevaUnidad);
-      setUnidadCreada(response.data); // Asumiendo que la respuesta contiene la unidad recién creada con su ID
-      alert('Unidad de aprendizaje creada con éxito');
-    } catch (error) {
-      console.error('Error al crear la unidad de aprendizaje:', error);
-      alert('Error al crear la unidad de aprendizaje');
-    }
-  };
-
+function CRUDParaProfesor() {
   return (
-    <div>
-      <h1 className="font-bold">Crear Unidad de Aprendizaje</h1>
-      <br></br>
-      <input
-        className="border-4 border-b-cyan-950 box-border rounded-sm "
-        type="text"
-        placeholder="Nombre"
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)}
-      /><br></br>
-      <textarea
-      className="field-sizing-content w-2xs border-2 border-black rounded-sm"
-        placeholder="Descripción"
-        value={descripcion}
-        onChange={(e) => setDescripcion(e.target.value)}
-      /><br></br>
-      <button className="cursor-pointer bg-blue-500 rounded-sm text-white text-5xl" onClick={crearUnidadDeAprendizaje}>Crear</button>
-
-      {unidadCreada && (
-        <div>
-          <h3>Unidad de aprendizaje creada con éxito:</h3>
-          <p>Nombre: {unidadCreada.nombre}</p>
-          <p>ID: {unidadCreada.id}</p> {/* Muestra el ID generado */}
+    <section className="overflow-hidden bg-white">
+      <div className="flex gap-5 max-md:flex-col">
+        <div className="w-[26%] max-md:ml-0 max-md:w-full">
+          <Sidebar />
         </div>
-      )}
-    </div>
+        <div className="ml-5 w-[74%] max-md:ml-0 max-md:w-full">
+          <div className="grow max-md:max-w-full">
+            <ContentHeader
+              title="Unidad de Aprendizaje"
+              subtitle="Crear unidad de aprendizaje"
+            />
+            <div className="flex flex-col px-8 pt-8 pb-80 bg-blue-300 bg-blend-normal max-md:px-5 max-md:pb-24 max-md:max-w-full">
+              <h2 className="self-start text-3xl font-semibold text-slate-800">
+                Create new event
+              </h2>
+              <p className="mt-5 text-lg tracking-wide text-gray-500 max-md:max-w-full">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit
+                amet, consectetur adipiscing elit, sed do eiusmodadipiscing
+                elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmodadipiscing elit, sed do
+                eiusmodeiusmodadipiscing elit, sed do eiusmodLorem
+              </p>
+              <CreateForm />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
-};
+}
 
-export default CrearUnidad;
+export default CRUDParaProfesor;

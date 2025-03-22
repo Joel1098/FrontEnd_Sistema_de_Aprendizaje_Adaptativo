@@ -1,12 +1,12 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import UnidadAprendizajePage from './pages/UnidadAprendizajePage';
+import Login from './pages/Inicio_sesion';
 
 const App = () => {
   return (
     <Router>
       <Routes>
         {/* Ruta para la Unidad de Aprendizaje */}
-        <Route path="/" element={<UnidadAprendizajePage />} />
+        <Route path="/" element={<Login/>} />
       </Routes>
     </Router>
   );
