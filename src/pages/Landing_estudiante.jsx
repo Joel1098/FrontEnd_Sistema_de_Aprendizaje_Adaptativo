@@ -1,6 +1,7 @@
 import desktop from "../../public/desktop.png";
 import image from "../../public/image.svg";
 
+
 export const InicioEstudiante = () => {
   return (
     <div className="bg-white flex flex-row justify-center w-full">

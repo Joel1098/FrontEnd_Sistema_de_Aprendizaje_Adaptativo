@@ -1,5 +1,3 @@
-"use client";
-
 
 function CreateForm() {
   const handleSubmit = (e) => {

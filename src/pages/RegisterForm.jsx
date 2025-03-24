@@ -1,53 +1,53 @@
-import axios from "axios"; // Importamos axios para hacer la petición
+import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import API_URL from "../config/apiConfiguration";
+import API_URL from "../config/apiConfiguration"; // Asegúrate de que la configuración de axios esté correcta
 
-function LoginForm() {
+function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword] = useState(false);
   const [error, setError] = useState(""); // Para manejar posibles errores
   const [loading, setLoading] = useState(false); // Para manejar el estado de carga
 
-  // Función para manejar el login
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validar que el email y la contraseña no estén vacíos
-    if (!email || !password) {
-      setError("Por favor ingrese ambos campos.");
+    // Validar que todos los campos estén llenos
+    if (!email || !password || !confirmPassword) {
+      setError("Por favor ingrese todos los campos.");
+      return;
+    }
+
+    // Validar que las contraseñas coincidan
+    if (password !== confirmPassword) {
+      setError("Las contraseñas no coinciden.");
       return;
     }
 
     try {
-      setLoading(true); // Indicamos que estamos haciendo la solicitud
-      setError(""); // Limpiamos el error si lo había
+      setLoading(true);
+      setError(""); // Limpiamos cualquier error previo
 
-      // Realizamos la solicitud POST para hacer el login
-      const response = await axios.post(`${API_URL}/api/auth/login`, // API del backend
-        { email, password }
-      );
+      // Realizamos la solicitud POST para hacer el registro
+      const response = await axios.post(`${API_URL}/api/auth/register`, { email, password });
 
       if (response.status === 200) {
-        console.log("Login exitoso", response.data);
-        // Aquí podrías redirigir al usuario a otra página o almacenar el token
-        // Ejemplo: localStorage.setItem('token', response.data.token);
+        alert("Registro exitoso!");
+        // Puedes redirigir al usuario o hacer alguna acción adicional
       }
     } catch (error) {
-      setError("Error al iniciar sesión. Verifique sus credenciales."); // Mostrar error si falla la solicitud
-      console.error("Error en login:", error);
+      setError("Error al registrar el usuario.");
+      console.error("Error en registro:", error);
     } finally {
       setLoading(false); // Terminamos el estado de carga
     }
   };
 
   return (
-
-    <div>
     <form onSubmit={handleSubmit} className="mt-20 max-md:mt-10">
       <p className="self-center text-base text-zinc-600 text-center">
-        Realice su inicio de sesión
+        Realice su registro
       </p>
 
       {/* Mostrar error si hay */}
@@ -80,38 +80,34 @@ function LoginForm() {
             placeholder="Ingresa tu contraseña"
             className="flex w-full gap-5 justify-between px-8 py-4 max-w-full text-base font-light bg-white border border-teal-400 border-solid rounded-[40px] text-neutral-400 max-md:px-5"
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-8 top-1/2 transform -translate-y-1/2 max-md:right-5"
-          >
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/773a7a108356148a02caaee3efc0e6ed5a203bc6?placeholderIfAbsent=true&apiKey=a73b68a54705491597344db5d49d250e"
-              alt={showPassword ? "Hide password" : "Show password"}
-              className="object-contain shrink-0 aspect-square w-[18px]"
-            />
-          </button>
         </div>
       </div>
 
-      <div className="flex flex-col items-end mt-6 max-w-full w-full">
-        <a href="#" className="text-xs font-light text-black">
-          ¿Olvidaste tu contraseña?
-        </a>
+      <div className="mt-8">
+        <label htmlFor="confirmPassword" className="block text-base text-black">
+          Confirmar Contraseña
+        </label>
+        <input
+          id="confirmPassword"
+          type={showPassword ? "text" : "password"}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          placeholder="Confirmar contraseña"
+          className="flex w-full gap-5 justify-between px-8 py-4 max-w-full text-base font-light bg-white border border-teal-400 border-solid rounded-[40px] text-neutral-400 max-md:px-5"
+        />
+      </div>
 
+      <div className="flex flex-col items-end mt-6 max-w-full w-full">
         <button
           type="submit"
           className="self-start px-7 py-3.5 mt-16 text-base text-white bg-slate-500 rounded-[36px] max-md:px-5 max-md:mt-10"
           disabled={loading} // Deshabilitar botón mientras cargamos
         >
-          {loading ? "Cargando..." : "Iniciar Sesión"}
+          {loading ? "Cargando..." : "Registrar"}
         </button>
       </div>
     </form>
-
-    <Link to="/unidad-de-aprendizaje">Ir a Unidad de Aprendizaje</Link>
-    </div>
   );
 }
 
-export default LoginForm;
+export default RegisterForm;
