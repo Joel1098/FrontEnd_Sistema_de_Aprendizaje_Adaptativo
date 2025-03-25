@@ -1,4 +1,4 @@
-import axios from "axios"; // Importamos axios para hacer la petición
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import API_URL from "../config/apiConfiguration";
@@ -25,7 +25,7 @@ function LoginForm() {
       setError(""); // Limpiamos el error si lo había
 
       // Realizamos la solicitud POST para hacer el login
-      const response = await axios.post(`${API_URL}/api/auth/login`, // API del backend
+      const response = await API_URL.post('/api/auth/login', // API del backend
         { email, password }
       );
 
