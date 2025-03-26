@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import API_URL from "../config/apiConfiguration";
 
 function LoginForm() {
@@ -9,6 +9,7 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(""); // Para manejar posibles errores
   const [loading, setLoading] = useState(false); // Para manejar el estado de carga
+  const navigate = useNavigate();
 
   // Función para manejar el login
   const handleSubmit = async (e) => {
@@ -31,6 +32,7 @@ function LoginForm() {
 
       if (response.status === 200) {
         console.log("Login exitoso", response.data);
+        navigate('/alumno-inicio');
         // Aquí podrías redirigir al usuario a otra página o almacenar el token
         // Ejemplo: localStorage.setItem('token', response.data.token);
       }
@@ -101,15 +103,14 @@ function LoginForm() {
 
         <button
           type="submit"
-          className="self-start px-7 py-3.5 mt-16 text-base text-white bg-slate-500 rounded-[36px] max-md:px-5 max-md:mt-10"
+          className="self-start px-7 py-3.5 mt-8 text-base text-white bg-slate-500 rounded-[36px] max-md:px-5 max-md:mt-10 hover:bg-slate-600"
           disabled={loading} // Deshabilitar botón mientras cargamos
+          
         >
           {loading ? "Cargando..." : "Iniciar Sesión"}
         </button>
       </div>
     </form>
-
-    <Link to="/unidad-de-aprendizaje">Ir a Unidad de Aprendizaje</Link>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API_URL from "../config/apiConfiguration"; // Asegúrate de que la configuración de axios esté correcta
 
 function RegisterForm() {
@@ -9,6 +10,7 @@ function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(""); // Para manejar posibles errores
   const [loading, setLoading] = useState(false); // Para manejar el estado de carga
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +32,8 @@ function RegisterForm() {
 
       if (response.status === 200) {
         alert("Registro exitoso");
+        setTimeout(5000);
+        navigate('/alumno-inicio');
         // Redirigir al alumno a su pantalla de inicio
       }
     } catch (error) {
@@ -112,7 +116,7 @@ function RegisterForm() {
       <div className="flex flex-col items-end mt-6 max-w-full w-full">
         <button
           type="submit"
-          className="self-start px-7 py-3.5 mt-16 text-base text-white bg-slate-500 rounded-[36px] max-md:px-5 max-md:mt-10"
+          className="self-start px-7 py-3.5 mt-16 text-base text-white bg-slate-500 rounded-[36px] max-md:px-5 max-md:mt-10 hover:bg-slate-600"
           disabled={loading} // Deshabilitar botón mientras cargamos
         >
           {loading ? "Cargando..." : "Registrar"}
