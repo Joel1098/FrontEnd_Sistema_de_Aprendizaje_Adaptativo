@@ -1,61 +1,59 @@
-"use client";
-import React from "react";
-import ActionMenu from "./ActionMenu";
+
 
 function Sidebar() {
-  const navigationItems = [
-    "Unidad de aprendizaje",
-    "Modulo",
-    "Tema",
-    "Preguntas",
-    "Respuestas",
-    "Evaluaciones",
-    "Contenido",
+  const navItems = [
+    { name: "Unidad de aprendizaje", active: false },
+    { name: "Módulo", active: false },
+    { name: "Tema", active: false },
+    { name: "Preguntas", active: false },
+    { name: "Respuestas", active: false },
+    { name: "Evaluaciones", active: false },
+    { name: "Subir contenido", active: false },
   ];
 
   return (
-    <aside className="flex flex-col items-start py-8 pr-20 pl-8 mx-auto w-full bg-white max-md:px-5 max-md:max-w-full">
-      <div className="flex flex-col items-start max-w-full text-slate-800 w-[363px]">
-        <div className="flex shrink-0 bg-teal-400 h-[50px] w-[50px]" />
-
-        {navigationItems.map((item, index) => (
-          <React.Fragment key={index}>
-            <h2
-              className={`${index === 0 ? "mt-12" : "mt-20"} text-3xl font-semibold max-md:mt-10`}
-            >
-              {item}
-            </h2>
-            {index === 0 && (
-              <div className="flex flex-col mt-9 ml-4 text-white whitespace-nowrap w-[82px] max-md:ml-2.5">
-                <div className="self-end text-base">Crear</div>
-                <div className="self-start mt-32 text-xl font-black max-md:mt-10"></div>
-              </div>
-            )}
-          </React.Fragment>
+    <nav className="flex flex-col bg-white w-[400px] max-md:w-[250px] max-sm:w-full max-sm:h-auto">
+      <div className="px-20 py-16">
+        <h2 className="text-xl font-semibold text-white bg-teal-400 rounded h-[58px] w-[146px] flex items-center justify-center">
+          Inicio
+        </h2>
+      </div>
+      <div className="flex flex-col gap-14 px-20 py-9 max-md:px-10 max-md:py-9 max-sm:hidden">
+        {navItems.map((item, index) => (
+          <button
+            key={index}
+            className={`text-xl font-semibold text-center ${
+              item.active ? "text-white" : "text-black"
+            } cursor-pointer`}
+          >
+            {item.name}
+          </button>
         ))}
+        <button className="flex justify-center items-center cursor-pointer">
+          <span className="text-xl font-semibold text-center text-black">
+            Cerrar sesión
+          </span>
+          <span>
+            <svg
+              width="34"
+              height="38"
+              viewBox="0 0 34 38"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="logout-icon"
+            >
+              <path
+                d="M12.75 33.25H7.08333C6.33189 33.25 5.61122 32.9164 5.07986 32.3225C4.54851 31.7286 4.25 30.9232 4.25 30.0833V7.91667C4.25 7.07681 4.54851 6.27136 5.07986 5.6775C5.61122 5.08363 6.33189 4.75 7.08333 4.75H12.75M22.6667 26.9167L29.75 19M29.75 19L22.6667 11.0833M29.75 19H12.75"
+                stroke="#1E1E1E"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+            </svg>
+          </span>
+        </button>
       </div>
-
-      <div className="px-4 pt-4 pb-64 max-w-full bg-white rounded-lg border border-solid border-zinc-300 min-h-[349px] w-[280px] max-md:pb-24">
-        <div className="flex gap-2 items-center w-full">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/a117795011dc58a22849cde6b655a206f65a8343?placeholderIfAbsent=true&apiKey=a73b68a54705491597344db5d49d250e"
-            className="object-contain self-stretch my-auto w-5 aspect-square"
-            alt="Icon"
-          />
-        </div>
-        <div className="flex mt-2 w-full min-h-11" />
-      </div>
-
-      <ActionMenu />
-
-      <div className="z-10 mt-0 max-w-full text-base tracking-wide whitespace-nowrap rounded-none text-zinc-900 w-[280px]">
-        <div className="flex gap-3 items-center px-3 py-4 w-full bg-blue-300 min-h-14">
-          <div className="flex-1 shrink self-stretch my-auto w-full basis-0 min-w-60">
-            Eliminar
-          </div>
-        </div>
-      </div>
-    </aside>
+    </nav>
   );
 }
 

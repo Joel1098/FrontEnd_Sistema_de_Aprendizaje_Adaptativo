@@ -1,17 +1,11 @@
-import PropTypes from "prop-types";
 
-function ContentHeader({ title, subtitle }) {
+
+function ContentHeader({ title }) {
   return (
-    <header className="flex flex-col items-start px-16 py-7 text-white bg-cyan-600 max-md:px-5 max-md:max-w-full">
-      <h1 className="text-5xl max-md:max-w-full">{title}</h1>
-      <p className="mt-1.5 text-2xl">{subtitle}</p>
+    <header className="px-14 py-12 text-5xl text-white bg-cyan-600 h-[163px] max-md:text-4xl max-sm:p-5 max-sm:h-auto max-sm:text-3xl">
+      {title}
     </header>
   );
 }
-
-ContentHeader.propTypes = {
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.func.isRequired
-};
 
 export default ContentHeader;

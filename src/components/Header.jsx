@@ -14,7 +14,7 @@ function Header() {
           Inicio
         </a>
         <a href="#" className="text-2xl tracking-wide text-zinc-600">
-          Acerca de
+          Unidades Inscritas
         </a>
       </nav>
 

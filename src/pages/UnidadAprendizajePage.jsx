@@ -1,27 +1,25 @@
-"use client";
 
 import ContentHeader from "./ContentHeader";
-import CreateForm from "./CreateForm";
+import LearningUnitsList from "./LearningUnitsList";
 import Sidebar from "./Sidebar";
 
-function CRUDParaProfesor() {
+function LearningDashboard() {
   return (
-    <section className="overflow-hidden bg-white">
-      <div className="flex gap-5 max-md:flex-col">
-        <div className="w-[26%] max-md:ml-0 max-md:w-full">
-          <Sidebar />
-        </div>
-        <div className="ml-5 w-[74%] max-md:ml-0 max-md:w-full">
-          <div className="grow max-md:max-w-full">
-            <ContentHeader
-              title="Unidad de Aprendizaje"
-              subtitle="Crear unidad de aprendizaje"
-            />
-            <div className="flex flex-col px-8 pt-8 pb-80 bg-blue-300 bg-blend-normal max-md:px-5 max-md:pb-24 max-md:max-w-full">
-              <h2 className="self-start text-3xl font-semibold text-slate-800">
-                Create new event
-              </h2>
-              <p className="mt-5 text-lg tracking-wide text-gray-500 max-md:max-w-full">
+    <>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+      <main className="flex mx-auto w-full max-w-none min-h-screen bg-white max-md:max-w-[900px] max-sm:flex-col max-sm:max-w-screen-sm">
+        <Sidebar />
+        <section className="flex flex-col flex-1 max-sm:w-full">
+          <ContentHeader title="Unidad de Aprendizaje" />
+          <div className="flex-1 p-8 bg-blue-300 bg-opacity-20 max-sm:p-4">
+            <header className="mb-10">
+              <h1 className="mb-5 text-3xl font-semibold text-slate-800 max-md:text-2xl">
+                Control de unidades de aprendizaje
+              </h1>
+              <p className="text-lg tracking-wide leading-normal text-gray-500">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit
                 amet, consectetur adipiscing elit, sed do eiusmodadipiscing
@@ -29,13 +27,13 @@ function CRUDParaProfesor() {
                 adipiscing elit, sed do eiusmodadipiscing elit, sed do
                 eiusmodeiusmodadipiscing elit, sed do eiusmodLorem
               </p>
-              <CreateForm />
-            </div>
+            </header>
+            <LearningUnitsList />
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      </main>
+    </>
   );
 }
 
-export default CRUDParaProfesor;
+export default LearningDashboard;

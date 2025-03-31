@@ -39,6 +39,9 @@ function LoginForm() {
     } catch (error) {
       setError("Error al iniciar sesión. Verifique sus credenciales."); // Mostrar error si falla la solicitud
       console.error("Error en login:", error);
+      setTimeout(() => {
+        setError();
+      }, 4000);
     } finally {
       setLoading(false); // Terminamos el estado de carga
     }
