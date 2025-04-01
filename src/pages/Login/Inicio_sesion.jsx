@@ -1,7 +1,7 @@
 import { useState } from "react";
-import AuthToggle from "./AuthToggle"; // Componente para cambiar entre login y registro
+import AuthToggle from "../AuthToggle"; // Componente para cambiar entre login y registro
+import RegisterForm from "../Registro/RegisterForm"; // Asegúrate de importar RegisterForm
 import LoginForm from "./LoginForm"; // Asegúrate de importar LoginForm
-import RegisterForm from "./RegisterForm"; // Asegúrate de importar RegisterForm
 
 function LoginPage() {
   const [activeTab, setActiveTab] = useState("login"); // Estado para manejar el formulario activo

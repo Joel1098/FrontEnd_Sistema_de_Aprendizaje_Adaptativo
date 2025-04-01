@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API_URL from "../config/apiConfiguration";
+import API_URL from "../../config/apiConfiguration";
 import LearningUnitElement from "./LearningUnitElement"; // Asegúrate de que este componente esté importado correctamente
 
 function LearningUnitGrid() {

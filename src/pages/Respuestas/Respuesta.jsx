@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import API_URL from '../config/apiConfiguration'; // Asegúrate de que la configuración de axios esté correcta
+import API_URL from '../../config/apiConfiguration'; // Asegúrate de que la configuración de axios esté correcta
 
 const Respuesta = () => {
   const [respuestas, setRespuestas] = useState([]);

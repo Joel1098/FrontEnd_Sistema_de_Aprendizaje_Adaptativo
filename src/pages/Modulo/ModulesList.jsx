@@ -1,5 +1,5 @@
 
-import LearningUnitItem from "./LearningUnitItem";
+import ModuleItem from "./ModuleItem";
 
 function LearningUnitsList() {
   const learningUnits = [
@@ -76,7 +76,7 @@ function LearningUnitsList() {
         </div>
 
         {learningUnits.map((unit, index) => (
-          <LearningUnitItem key={index} unit={unit} />
+          <ModuleItem key={index} unit={unit} />
         ))}
       </div>
     </section>

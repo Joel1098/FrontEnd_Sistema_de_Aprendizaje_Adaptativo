@@ -1,5 +1,5 @@
 import { useState } from "react";
-import API_URL from "../config/apiConfiguration"; // Asegúrate de que la configuración de axios esté correcta
+import API_URL from "../../config/apiConfiguration"; // Asegúrate de que la configuración de axios esté correcta
 
 function LearningUnitElement({ title, unitId }) {
   const [isEnrolled, setIsEnrolled] = useState(false); // Estado para saber si el usuario está inscrito

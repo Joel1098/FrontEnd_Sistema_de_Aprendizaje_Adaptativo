@@ -1,7 +1,7 @@
 
-import ContentHeader from "./ContentHeader";
-import LearningUnitsList from "./LearningUnitsList";
-import Sidebar from "./Sidebar";
+import Sidebar from "../../components/Sidebar";
+import ContentHeader from "../ContentHeader";
+import LearningUnitsList from "../UnidadDeAprendizaje/LearningUnitsList";
 
 function ModuloDashboard() {
   return (

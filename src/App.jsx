@@ -1,10 +1,10 @@
 // App.jsx
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import LoginPage from './pages/Inicio_sesion'; // Importa las páginas
-import HomePage from './pages/Landing_estudiante';
-import ModuloDashboard from './pages/ModuloPage';
-import LearningUnitsPage from './pages/Ua_Estudiante';
-import LearningDashboard from './pages/UnidadAprendizajePage';
+import HomePage from './pages/Estudiante/Landing_estudiante';
+import LearningUnitsPage from './pages/Estudiante/Ua_Estudiante';
+import LoginPage from './pages/Login/Inicio_sesion'; // Importa las páginas
+import ModuloDashboard from './pages/Modulo/ModuloPage';
+import LearningDashboard from './pages/UnidadDeAprendizaje/UnidadAprendizajePage';
 
 
 function App() {

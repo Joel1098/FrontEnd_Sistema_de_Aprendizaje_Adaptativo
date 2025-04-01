@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API_URL from "../config/apiConfiguration"; // Asegúrate de que la configuración de axios esté correcta
+import API_URL from "../../config/apiConfiguration"; // Asegúrate de que la configuración de axios esté correcta
 
 function RegisterForm() {
   const [email, setEmail] = useState("");

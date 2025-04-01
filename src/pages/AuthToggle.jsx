@@ -1,5 +1,5 @@
 
-import PropTypes from "prop-types";
+
 
 function AuthToggle({ setActiveTab }) {
   return (
@@ -24,8 +24,5 @@ function AuthToggle({ setActiveTab }) {
   );
 }
 
-AuthToggle.propTypes = {
-  setActiveTab: PropTypes.string.isRequired,
-};
 
 export default AuthToggle;
