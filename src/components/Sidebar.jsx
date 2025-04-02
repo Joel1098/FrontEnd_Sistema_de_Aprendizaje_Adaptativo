@@ -1,33 +1,35 @@
 
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   const navItems = [
-    { name: "Unidad de aprendizaje", active: false },
-    { name: "Módulo", active: false },
-    { name: "Tema", active: false },
-    { name: "Preguntas", active: false },
-    { name: "Respuestas", active: false },
-    { name: "Evaluaciones", active: false },
-    { name: "Subir contenido", active: false },
+    { name: "Unidad de aprendizaje", path:'/unidad-de-aprendizaje' },
+    { name: "Módulo", path:'/modulo'  },
+    { name: "Tema",  path:'/tema' },
+    { name: "Preguntas", path:'/preguntas'  },
+    { name: "Respuestas",  path:'/respuestas'  },
+    { name: "Evaluaciones", path:'/evaluaciones'  },
+    { name: "Subir contenido", path:'/subir-contenido'  },
   ];
 
   return (
     <nav className="flex flex-col bg-white w-[400px] max-md:w-[250px] max-sm:w-full max-sm:h-auto">
       <div className="px-20 py-16">
-        <h2 className="text-xl font-semibold text-white bg-teal-400 rounded h-[58px] w-[146px] flex items-center justify-center">
+        <h2 
+        className="text-xl font-semibold text-white bg-teal-400 rounded h-[58px] w-[146px] flex items-center justify-center cursor-pointer hover:bg-cyan-600">
           Inicio
         </h2>
       </div>
       <div className="flex flex-col gap-14 px-20 py-9 max-md:px-10 max-md:py-9 max-sm:hidden">
         {navItems.map((item, index) => (
-          <button
-            key={index}
-            className={`text-xl font-semibold text-center ${
-              item.active ? "text-white" : "text-black"
-            } cursor-pointer`}
-          >
-            {item.name}
-          </button>
+          <Link to={item.path} key={index} className="flex justify-center items-center cursor-pointer hover:bg-gray-500 rounded-2xl hover:scale-105 p-3 hover:text-amber-50">
+            <button
+              className={`text-xl font-semibold text-center bg-neutral-500${
+                item.active ? "text-white" : "text-black"} cursor-pointer `}
+            >
+              {item.name}
+            </button>
+          </Link>
         ))}
         <button className="flex justify-center items-center cursor-pointer">
           <span className="text-xl font-semibold text-center text-black">

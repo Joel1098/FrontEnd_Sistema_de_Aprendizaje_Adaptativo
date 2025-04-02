@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import API_URL from "../../config/apiConfiguration"; // Asegúrate de que la configuración de la API esté correcta
-import LearningUnitItem from "./LearningUnitItem"; // Asegúrate de que este componente esté correctamente importado
+import TemaItem from "./TemaItem"; // Asegúrate de que este componente esté correctamente importado
 
-function LearningUnitsList() {
+function TemasList() {
   const [learningUnits, setLearningUnits] = useState([]); // Estado para las unidades de aprendizaje
   const [loading, setLoading] = useState(false); // Estado para cargar
   const [error, setError] = useState(""); // Estado para errores
@@ -33,24 +33,29 @@ function LearningUnitsList() {
   return (
     <section className="flex-1 p-8 bg-blue-300 bg-opacity-20">
       <h2 className="mb-5 text-3xl font-semibold text-slate-800">
-        Control de unidades de aprendizaje
+        Control de temas
       </h2>
       <p className="mb-10 text-lg tracking-wide text-gray-500">
-        Administra las unidades de aprendizaje que se encuentran registradas en el sistema.
+        Administra los temas que se encuentran en cada módulo registrado.
       </p>
 
       {/* Sección para el botón de agregar unidad */}
       <div className="flex justify-between items-center mb-8 max-sm:flex-col max-sm:gap-5">
-        <h3 className="text-2xl font-medium text-black">Unidades de Aprendizaje Registradas</h3>
+        <h3 className="text-2xl font-medium text-black">Temas Registrados</h3>
         <div className="flex gap-5">
+          
           <select className="px-5 py-0 text-lg bg-white rounded h-[51px] text-stone-900 w-[306px] max-sm:w-full">
-            <option>UNIDADES DE APRENDIZAJE</option>
+            
+            <option>MÓDULO 1</option>
+            <option>MÓDULO 2</option>
+            <option>MÓDULO 3</option>
+            <option>MÓDULO 4</option>
           </select>
           <div className="flex justify-between items-center mb-8">
             <button
               className="text-sm font-bold text-white bg-teal-400 rounded cursor-pointer border-[none] h-[51px] w-[194px]"
             >
-              AGREGAR UNIDAD
+              AGREGAR TEMA
             </button>
           </div>
         </div>
@@ -69,10 +74,10 @@ function LearningUnitsList() {
       {/* Aquí se mapean las unidades de aprendizaje y se muestran en tarjetas */}
       <div className="flex flex-col gap-3">
         {learningUnits.length === 0 ? (
-          <p>No hay unidades de aprendizaje disponibles.</p>
+          <p>No hay temas disponibles.</p>
         ) : (
           learningUnits.map((unit) => (
-            <LearningUnitItem
+            <TemaItem
               key={unit.id}
               unit={unit} // Aquí se pasan todas las propiedades de la unidad
             />
@@ -83,4 +88,4 @@ function LearningUnitsList() {
   );
 }
 
-export default LearningUnitsList;
+export default TemasList;

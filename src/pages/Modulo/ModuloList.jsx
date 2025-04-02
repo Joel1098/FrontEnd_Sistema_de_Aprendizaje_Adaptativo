@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import API_URL from "../../config/apiConfiguration"; // Asegúrate de que la configuración de la API esté correcta
-import LearningUnitItem from "./LearningUnitItem"; // Asegúrate de que este componente esté correctamente importado
+import ModuloItem from "./ModuloItem"; // Asegúrate de que este componente esté correctamente importado
 
-function LearningUnitsList() {
+function ModulosList() {
   const [learningUnits, setLearningUnits] = useState([]); // Estado para las unidades de aprendizaje
   const [loading, setLoading] = useState(false); // Estado para cargar
   const [error, setError] = useState(""); // Estado para errores
@@ -14,7 +14,7 @@ function LearningUnitsList() {
       setLoading(true);
       setError(""); // Limpiar el error si lo había
       try {
-        const response = await API_URL.get("/api/unidades-de-aprendizaje/listar"); // Ruta API para obtener las unidades de aprendizaje
+        const response = await API_URL.get('/api/unidades-de-aprendizaje/listar'); // Ruta API para obtener las unidades de aprendizaje
         setLearningUnits(response.data); // Almacenamos los datos en el estado
       } catch (error) {
         setError("Error al obtener las unidades de aprendizaje.");
@@ -33,24 +33,28 @@ function LearningUnitsList() {
   return (
     <section className="flex-1 p-8 bg-blue-300 bg-opacity-20">
       <h2 className="mb-5 text-3xl font-semibold text-slate-800">
-        Control de unidades de aprendizaje
+        Control de modulos.
       </h2>
       <p className="mb-10 text-lg tracking-wide text-gray-500">
-        Administra las unidades de aprendizaje que se encuentran registradas en el sistema.
+        Administra los modulos correspondientes que abarquen toda una a una unidad de aprendizaje. 
       </p>
 
       {/* Sección para el botón de agregar unidad */}
       <div className="flex justify-between items-center mb-8 max-sm:flex-col max-sm:gap-5">
-        <h3 className="text-2xl font-medium text-black">Unidades de Aprendizaje Registradas</h3>
-        <div className="flex gap-5">
-          <select className="px-5 py-0 text-lg bg-white rounded h-[51px] text-stone-900 w-[306px] max-sm:w-full">
-            <option>UNIDADES DE APRENDIZAJE</option>
+        <h3 className="text-2xl font-medium text-black">Módulos Registrados</h3>
+        <div className="flex gap-4">
+          <select className="px-3 py-0 text-lg bg-white rounded h-[51px] text-stone-900 w-[306px] max-sm:w-full">
+            <option>Patrones de diseño</option>
+            <option>Fundamentos de programación</option>
+            <option>Sistemas Distribuidos</option>
+            <option>Analisis y diseño</option>
+
           </select>
           <div className="flex justify-between items-center mb-8">
             <button
               className="text-sm font-bold text-white bg-teal-400 rounded cursor-pointer border-[none] h-[51px] w-[194px]"
             >
-              AGREGAR UNIDAD
+              AGREGAR MODULO
             </button>
           </div>
         </div>
@@ -69,10 +73,10 @@ function LearningUnitsList() {
       {/* Aquí se mapean las unidades de aprendizaje y se muestran en tarjetas */}
       <div className="flex flex-col gap-3">
         {learningUnits.length === 0 ? (
-          <p>No hay unidades de aprendizaje disponibles.</p>
+          <p>No hay unidades módulos disponibles.</p>
         ) : (
           learningUnits.map((unit) => (
-            <LearningUnitItem
+            <ModuloItem
               key={unit.id}
               unit={unit} // Aquí se pasan todas las propiedades de la unidad
             />
@@ -83,4 +87,4 @@ function LearningUnitsList() {
   );
 }
 
-export default LearningUnitsList;
+export default ModulosList;

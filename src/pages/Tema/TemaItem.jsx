@@ -1,6 +1,6 @@
 
 
-function UnitLearningItem({ unit }) {
+function TemaItem({ unit }) {
   
 
   return (
@@ -24,4 +24,4 @@ function UnitLearningItem({ unit }) {
   );
 }
 
-export default UnitLearningItem;
+export default TemaItem;

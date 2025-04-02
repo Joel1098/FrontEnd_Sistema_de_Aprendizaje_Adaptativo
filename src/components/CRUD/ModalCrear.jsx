@@ -1,21 +1,59 @@
+import { useState } from "react";
+import InputField from "./InputField";
+import ModalActions from "./ModalActions";
+import ModalHeader from "./ModalHeader";
+import TextareaField from "./TextareaField";
 
+function ModalesParaCRUD() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
-function Modal({ isOpen, onClose, children }) {
-  if (!isOpen) return null; // Si el modal no está abierto, no renderiza nada
+  const handleCancel = () => {
+    // Handle cancel action
+    setName("");
+    setDescription("");
+  };
+
+  const handleConfirm = () => {
+    // Handle confirm action
+    console.log({ name, description });
+  };
+
+  const handleClose = () => {
+    // Handle close action
+    handleCancel();
+  };
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg w-96">
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
-        >
-          X
-        </button>
-        {children}
-      </div>
-    </div>
+    <section className="flex flex-col justify-center items-center w-full backdrop-blur bg-gray-200 bg-opacity-70 min-h-[960px] max-md:max-w-full">
+      <article className="overflow-hidden max-w-full bg-white rounded-2xl shadow-xl w-[640px]">
+        <ModalHeader
+          title="Agregar Unidad de Aprendizaje"
+          onClose={handleClose}
+        />
+
+        <div className="px-6 w-full max-md:px-5 max-md:max-w-full">
+          <form className="w-full max-md:max-w-full">
+            <InputField
+              label="Nombre"
+              placeholder="Título de unidad de aprendizaje"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <TextareaField
+              label="Descripción"
+              placeholder="Agregar una breve descripción de su unidad de aprendizaje a ingresar al sistema"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </form>
+        </div>
+
+        <ModalActions onCancel={handleCancel} onConfirm={handleConfirm} />
+      </article>
+    </section>
   );
 }
 
-export default Modal;
+export default ModalesParaCRUD;
