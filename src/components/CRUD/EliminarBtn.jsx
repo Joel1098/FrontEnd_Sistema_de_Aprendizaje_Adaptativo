@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+
 import API_URL from '../../config/apiConfiguration';
 
 const EliminarBtn = ({ url, obtenerDatos }) => {
@@ -14,11 +14,6 @@ const EliminarBtn = ({ url, obtenerDatos }) => {
   };
 
   return <button onClick={handleEliminar}>Eliminar</button>;
-};
-
-EliminarBtn.propTypes = {
-    url: PropTypes.string.isRequired,
-    obtenerDatos: PropTypes.func.isRequired
 };
 
 export default EliminarBtn;

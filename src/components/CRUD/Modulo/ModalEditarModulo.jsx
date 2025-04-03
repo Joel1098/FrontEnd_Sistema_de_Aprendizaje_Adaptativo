@@ -1,8 +1,8 @@
 import { useState } from "react";
-import InputField from "./InputField";
-import ModalActions from "./ModalActions";
-import ModalHeader from "./ModalHeader";
-import TextareaField from "./TextareaField";
+import InputField from "../InputField";
+import ModalActions from "../ModalActions";
+import ModalHeader from "../ModalHeader";
+import TextareaField from "../TextareaField";
 
 function ModalEditar() {
   const [name, setName] = useState("");

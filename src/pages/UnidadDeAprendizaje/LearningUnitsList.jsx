@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import ModalesParaCRUD from "../../components/CRUD/ModalCrear";
+import ModalEliminar from "../../components/CRUD/ModalEliminar";
+import ModalesParaCRUD from "../../components/CRUD/UnidadDeAprendizaje/ModalCrearUnidad";
 import API_URL from "../../config/apiConfiguration"; // Asegúrate de que la configuración de la API esté correcta
 import LearningUnitItem from "./LearningUnitItem"; // Asegúrate de que este componente esté correctamente importado
-import ModalEliminar from "../../components/CRUD/ModalEliminar";
 
 function LearningUnitsList() {
   const [learningUnits, setLearningUnits] = useState([]); // Estado para las unidades de aprendizaje
