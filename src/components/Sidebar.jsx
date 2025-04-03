@@ -15,12 +15,15 @@ function Sidebar() {
   return (
     <nav className="flex flex-col bg-white w-[400px] max-md:w-[250px] max-sm:w-full max-sm:h-auto">
       <div className="px-20 py-16">
-        <h2 
-        className="text-xl font-semibold text-white bg-teal-400 rounded h-[58px] w-[146px] flex items-center justify-center cursor-pointer hover:bg-cyan-600">
+        <Link
+        to="/inicio-profesor"
+        className="text-xl font-semibold text-white bg-teal-400 rounded h-[58px] w-[146px] flex items-center justify-center cursor-pointer hover:bg-cyan-600"
+        
+        >
           Inicio
-        </h2>
+        </Link>
       </div>
-      <div className="flex flex-col gap-14 px-20 py-9 max-md:px-10 max-md:py-9 max-sm:hidden">
+      <div className="flex flex-col gap-14 px-20 py-2 max-md:px-10 max-md:py-9 max-sm:hidden">
         {navItems.map((item, index) => (
           <Link to={item.path} key={index} className="flex justify-center items-center cursor-pointer hover:bg-gray-500 rounded-2xl hover:scale-105 p-3 hover:text-amber-50">
             <button

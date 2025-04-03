@@ -7,6 +7,7 @@ import LoginPage from './pages/Login/Inicio_sesion'; // Importa las páginas
 // CRUD de profesor por página
 import ModuloDashboard from './pages/Modulo/ModuloPage';
 import PreguntaDashboard from './pages/Preguntas/PreguntaPage';
+import HomePageProfesor from './pages/Profesor/Landing_profesor';
 import RespuestaDashboard from './pages/Respuestas/RespuestaPage';
 import TemaDashboard from './pages/Tema/TemaPage';
 import LearningDashboard from './pages/UnidadDeAprendizaje/UnidadAprendizajePage';
@@ -31,7 +32,9 @@ function App() {
         <Route path="/inscribir-unidades" element={<LearningUnitsPage />}/>
         
          {/* Navegacion para profesor */}
-         <Route path="/unidad-de-aprendizaje" element={<LearningDashboard />} /> {/* Página de Unidad de Aprendizaje */}
+         <Route path="/inicio-profesor" element={<HomePageProfesor />}/>{/*Landing profesor*/}
+         <Route path="/menu-control" element={<LearningDashboard />} /> {/* Página de Unidad de Aprendizaje */}
+         <Route path="/unidad-de-aprendizaje" element={<LearningDashboard />} /> 
           <Route path="/modulo" element={<ModuloDashboard />} /> {/* Página de Módulo */}
           <Route path="/tema" element={<TemaDashboard />} /> {/* Página de Tema */}
           <Route path="/preguntas" element={<PreguntaDashboard />} /> {/* Página de Pregunta */}
