@@ -1,74 +1,59 @@
-import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
-import API_URL from '../../config/apiConfiguration';
+import { useState } from "react";
+import InputField from "./InputField";
+import ModalActions from "./ModalActions";
+import ModalHeader from "./ModalHeader";
+import TextareaField from "./TextareaField";
 
-const EditarBtn = ({ url, obtenerDatos }) => {
-  const [unidad, setUnidad] = useState({
-    nombre: '',
-    descripcion: '',
-    usuarioId: 0
-  });
+function ModalEditar() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
-  const handleChange = (e) => {
-    setUnidad({
-      ...unidad,
-      [e.target.name]: e.target.value
-    });
+  const handleCancel = () => {
+    // Handle cancel action
+    setName("");
+    setDescription("");
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await API_URL.put(url, unidad);
-      obtenerDatos(); // Actualiza la lista después de editar
-      alert('Unidad editada con éxito');
-    } catch (error) {
-      console.error('Error al editar unidad:', error);
-      alert('Error al editar la unidad');
-    }
+  const handleConfirm = () => {
+    // Handle confirm action
+    console.log({ name, description });
   };
 
-  useEffect(() => {
-    const fetchUnidad = async () => {
-      const response = await API_URL.get(url);
-      setUnidad(response.data);
-    };
-    fetchUnidad();
-  }, [url]);
+  const handleClose = () => {
+    // Handle close action
+    handleCancel();
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="nombre"
-        placeholder="Nombre"
-        value={unidad.nombre}
-        onChange={handleChange}
-        required
-      />
-      <textarea
-        name="descripcion"
-        placeholder="Descripción"
-        value={unidad.descripcion}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="number"
-        name="usuarioId"
-        placeholder="ID del Usuario"
-        value={unidad.usuarioId}
-        onChange={handleChange}
-        required
-      />
-      <button type="submit">Editar Unidad</button>
-    </form>
+    <section className="flex flex-col justify-center items-center w-full backdrop-blur bg-gray-200 bg-opacity-70 min-h-[960px] max-md:max-w-full">
+      <article className="overflow-hidden max-w-full bg-white rounded-2xl shadow-xl w-[640px]">
+        <ModalHeader
+          title="Agregar Modulo"
+          onClose={handleClose}
+        />
+
+        <div className="px-6 w-full max-md:px-5 max-md:max-w-full">
+          <form className="w-full max-md:max-w-full">
+            <InputField
+              label="Nombre"
+              placeholder="Título de módulo"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <TextareaField
+              label="Descripción"
+              placeholder="Agregar una breve descripción de su módulo a registrar"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </form>
+        </div>
+
+        <ModalActions onCancel={handleCancel} onConfirm={handleConfirm} />
+      </article>
+    </section>
   );
-};
+}
 
-EditarBtn.propTypes = {
-    url: PropTypes.string.isRequired,
-    obtenerDatos: PropTypes.func.isRequired
-};
-
-export default EditarBtn;
+export default ModalEditar;
