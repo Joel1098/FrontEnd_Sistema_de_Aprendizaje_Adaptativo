@@ -62,11 +62,10 @@ function PreguntaList() {
       {/* Encabezado de la tabla con los títulos de las columnas */}
       <div className="grid gap-5 px-24 py-5 grid-cols-[2fr_1fr_1fr_1fr_2fr_0.5fr] max-md:p-4 max-md:grid-cols-[1.5fr_1fr_1fr_1fr_1.5fr_0.5fr] max-sm:gap-2.5 max-sm:p-2.5 max-sm:grid-cols-[1fr]">
         <div className="text-xs font-semibold text-neutral-400">Nombre</div>
-        <div className="text-xs font-semibold text-neutral-400">Módulos</div>
-        <div className="text-xs font-semibold text-neutral-400">Temas</div>
-        <div className="text-xs font-semibold text-neutral-400">Evaluaciones</div>
-        <div className="text-xs font-semibold text-neutral-400">Descripción</div>
-        <div className="text-xs font-semibold text-neutral-400">Acciones</div>
+        <div className="text-xs font-semibold text-neutral-400">Evaluación</div>
+        <div className="text-xs font-semibold text-neutral-400">Respuestas</div>
+        <div className="text-xs font-semibold text-neutral-400">Dificultad</div>
+       
       </div>
 
       {/* Aquí se mapean las unidades de aprendizaje y se muestran en tarjetas */}

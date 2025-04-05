@@ -1,7 +1,7 @@
 
-import { FaTrashAlt } from "react-icons/fa"; // Puedes usar cualquier librería de íconos (yo usé react-icons para el ícono de la papelera)
+import { FaEdit, FaTrashAlt } from "react-icons/fa"; // Puedes usar cualquier librería de íconos (yo usé react-icons para el ícono de la papelera)
 
-function LearningUnitItem({ unit, onDelete }) {
+function LearningUnitItem({ unit, onDelete, onEdit }) {
   const { nombre, modulos, temas, evaluaciones, descripcion } = unit;
 
   return (
@@ -11,7 +11,17 @@ function LearningUnitItem({ unit, onDelete }) {
       <div className="text-sm text-center text-black">{temas}</div>
       <div className="text-sm text-center text-black">{evaluaciones}</div>
       <div className="text-sm text-center text-black">{descripcion}</div>
+      
       <div className="flex gap-2.5 justify-center max-sm:absolute max-sm:right-2.5 max-sm:top-2/4 max-sm:-translate-y-2/4">
+       
+      <button
+          aria-label="Delete"
+          onClick={() => onEdit(unit)} // Llamamos a onDelete pasando la unidad
+          className="ti ti-trash text-2xl cursor-pointer"
+        >
+          <FaEdit />
+        </button>
+       
         <button
           aria-label="Delete"
           onClick={() => onDelete(unit)} // Llamamos a onDelete pasando la unidad

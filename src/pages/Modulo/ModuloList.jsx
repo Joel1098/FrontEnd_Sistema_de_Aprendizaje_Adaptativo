@@ -8,12 +8,12 @@ import ModuloItem from "./ModuloItem"; // Asegúrate de que este componente est�
 function ModulosList() {
   const [learningUnits, setLearningUnits] = useState([]);
   const [modulos, setModulos] = useState([]); // Estado para las unidades de aprendizaje
-  const [selectedUnits, setSelectedUnits] = useState(null);
+  const [selectedUnidad, setSelectedUnidad] = useState(null);
   const [loading, setLoading] = useState(false); // Estado para cargar
   const [error, setError] = useState(""); // Estado para errores
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); 
   const [isModal, SetisModal] = useState(false);
-  const [unitToDelete, setUnitToDelete] = useState(null);
+  const [moduleToDelete, setModuleToDelete] = useState(null);
 
 
   // Obtener las unidades de aprendizaje
@@ -35,38 +35,36 @@ function ModulosList() {
     fetchLearningUnits(); // Llamada para obtener las unidades de aprendizaje
   }, []); // Solo se ejecuta al montar el componente
 
-  // Obtener las unidades de aprendizaje
-  useEffect(() => {
-    if (selectedUnits) {
-      const fetchModules = async () => {
-        setLoading(true);
-        setError(""); // Limpiar el error si lo había
-        try {
-          const response = await API_URL.get(`/api/modulos/${selectedUnits.id}`); // Obtener módulos por ID de unidad
-          if (response && response.data) {
-            setModulos(response.data); // Almacenamos los módulos
-          } else {
-            setError("No se encontraron módulos para esta unidad.");
-          }
-        } catch (error) {
-          setError("Error al obtener los módulos.");
-          console.error(error);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchModules(); // Llamada para obtener los módulos cuando se selecciona una unidad
+   // Obtener módulos cuando se selecciona una unidad de aprendizaje
+   const fetchModulos = async (unidadDeAprendizajeId) => {
+    setLoading(true);
+    setError(""); // Limpiar el error si lo había
+    try {
+      const response = await API_URL.get(`/api/modulos/${unidadDeAprendizajeId}`); // Ruta para obtener módulos
+      setModulos(response.data); // Almacenamos los módulos
+    } catch (error) {
+      setError("Error al obtener los módulos.");
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
-  }, [selectedUnits]);
+  };
+
+  // Cuando seleccionamos una unidad, obtenemos sus módulos
+  const handleUnidadChange = (e) => {
+    const selectedUnidadId = e.target.value;
+    setSelectedUnidad(selectedUnidadId); // Actualizamos la unidad seleccionada
+    fetchModulos(selectedUnidadId); // Traemos los módulos de esa unidad
+  };
 
 
   const openModal = () => SetisModal(true);
 
   const closeModal = () => SetisModal(false);
 
-  const openDeleteModal = (unit) => {
-    setUnitToDelete(unit); // Asignamos la unidad a eliminar
+
+  const openDeleteModal = (module) => {
+    setModuleToDelete(module); // Asignamos la unidad a eliminar
     setIsDeleteModalOpen(true); 
   };
 
@@ -74,13 +72,13 @@ function ModulosList() {
   const closeDeleteModal = () => setIsDeleteModalOpen(false);
 
 
-  const handleDeleteUnit = async () => {
+  const handleDeleteModule = async () => {
     try {
-      await API_URL.delete(`/api/unidades-de-aprendizaje/eliminar/${unitToDelete.id}`);
-      setLearningUnits((prevUnits) => prevUnits.filter((unit) => unit.id !== unitToDelete.id)); 
+      await API_URL.delete(`/api/modulos/eliminar/${moduleToDelete.id}`);
+      setModulos((prevModulos) => prevModulos.filter((module) => module.id !== moduleToDelete.id)); 
       closeDeleteModal(); 
     } catch (error) {
-      console.error("Error al eliminar la unidad:", error);
+      console.error("Error al eliminar el modulo:", error);
     }
   };
 
@@ -100,14 +98,16 @@ function ModulosList() {
       <div className="flex justify-between items-center mb-8 max-sm:flex-col max-sm:gap-5">
         <h3 className="text-2xl font-medium text-black">Módulos Registrados</h3>
         <div className="flex gap-5">
-          <select 
+        <select
             className="px-5 py-0 text-lg bg-white rounded h-[51px] text-stone-900 w-[306px] max-sm:w-full"
-            onChange={(e) => setSelectedUnits(learningUnits.find(unit => unit.id === parseInt(e.target.value)))}
-            value={selectedUnits ? selectedUnits.id : ""}
+            onChange={handleUnidadChange}
+            value={selectedUnidad || ""}
           >
             <option value="">Selecciona una unidad de aprendizaje</option>
             {learningUnits.map((unit) => (
-              <option key={unit.id} value={unit.id}>{unit.nombre}</option>
+              <option key={unit.id} value={unit.id}>
+                {unit.nombre}
+              </option>
             ))}
           </select>
           <div className="flex justify-between items-center mb-8">
@@ -138,7 +138,7 @@ function ModulosList() {
           modulos.map((module) => (
             <ModuloItem
               key={module.id}
-              unit={module}
+              module={module}
               onDelete={() => openDeleteModal(module)} // Pasamos la función para eliminar
             />
           ))
@@ -146,7 +146,7 @@ function ModulosList() {
       </div>
 
       {/* Modal de Crear Módulo */}
-      <ModalesParaCRUD isOpen={isModal} onClose={closeModal}>
+      <ModalesParaCRUD isOpen={isModal} onClose={closeModal} selectedUnidad={selectedUnidad}>
         <h2 className="text-lg font-semibold">Crear Módulo</h2>
         <form>
           <div className="mt-4">
@@ -189,8 +189,8 @@ function ModulosList() {
       <ModalEliminar
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
-        onConfirmDelete={handleDeleteUnit}
-        itemName={unitToDelete?.nombre} // Nombre de la unidad a eliminar
+        onConfirmDelete={handleDeleteModule}
+        itemName={moduleToDelete?.nombre} // Nombre de la unidad a eliminar
       />
     </section>
   );

@@ -30,7 +30,7 @@ function ModalesParaCRUD({ isOpen, onClose }) {
       setError(""); // Limpiar errores previos
 
       // Realizamos la solicitud para crear la unidad de aprendizaje
-      const response = await API_URL.post("/api/modulos/crear", {
+      const response = await API_URL.post("/api/unidades-de-aprendizaje/crear", {
         Nombre: nombre,
         Descripcion: descripcion,
         UsuarioId: UsuarioId

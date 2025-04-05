@@ -6,12 +6,13 @@ import ModalHeader from "../ModalHeader";
 import TextareaField from "../TextareaField";
 
 
-function ModalesParaCRUD({ isOpen, onClose }) {
+function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
   const [nombre, setNombre] = useState(""); // Estado para el nombre de la unidad
   const [descripcion, setDescripcion] = useState(""); // Estado para la descripción de la unidad
   const [orden, setOrden] = useState(0);
   const [loading, setLoading] = useState(false); // Estado para manejar la carga
   const [error, setError] = useState(""); // Para manejar posibles errores
+  const [setNewModule] = useState({}); // Estado para el nuevo módulo
 
   const handleCancel = () => {
     setNombre(""); // Limpiar el nombre
@@ -20,12 +21,10 @@ function ModalesParaCRUD({ isOpen, onClose }) {
   };
 
   const handleConfirm = async () => {
-    if (!nombre || !descripcion) {
+    if (!nombre || !orden || !descripcion || !selectedUnidad) {
       setError("Todos los campos son obligatorios");
       return;
     }
-
-      const unidadId = 9;
       
 
     try {
@@ -34,15 +33,20 @@ function ModalesParaCRUD({ isOpen, onClose }) {
 
       // Realizamos la solicitud para crear la unidad de aprendizaje
       const response = await API_URL.post("/api/modulos/crear", {
-        unidadDeAprendizajeId: unidadId,
+        
+        UnidadDeAprendizajeidUnidad: selectedUnidad,
         Nombre: nombre,
         Descripcion: descripcion,
-        Orden: orden
+        OrdenModulo: orden
       });
 
       // Si la respuesta es exitosa, cerramos el modal y actualizamos la lista
       if (response.status === 200) {
-        console.log("Unidad creada exitosamente", response.data);
+
+        const newModule = response.data; // Guardamos el nuevo módulo creado
+
+        setNewModule((prevModulos) => [...prevModulos, newModule]);
+        console.log("Unidad creada exitosamente", newModule);
         onClose(true); // Cerrar el modal
       }
     } catch (error) {
@@ -72,8 +76,9 @@ function ModalesParaCRUD({ isOpen, onClose }) {
                   <InputField
                   label="Orden"
                   placeholder="Orden del módulo"
-                  number={orden}
+                  value={orden}
                   onChange={(e) => setOrden(e.target.value)}
+                  type="number"
                 />
 
                 <TextareaField

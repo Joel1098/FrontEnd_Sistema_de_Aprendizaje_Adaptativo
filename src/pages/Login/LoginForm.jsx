@@ -52,7 +52,7 @@ function LoginForm() {
     <div>
     <form onSubmit={handleSubmit} className="mt-20 max-md:mt-10">
       <p className="self-center text-base text-zinc-600 text-center">
-        Realice su inicio de sesión
+       Realizar inicio de sesión
       </p>
 
       {/* Mostrar error si hay */}
