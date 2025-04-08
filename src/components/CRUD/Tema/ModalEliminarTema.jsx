@@ -1,8 +1,8 @@
 import { useState } from "react";
-import ModalActions from "./ModalActions"; // Asegúrate de tener este componente de acciones ya definido
-import ModalHeader from "./ModalHeader"; // Asegúrate de tener este componente también
+import ModalActions from "../ModalActions"; // Asegúrate de tener este componente de acciones ya definido
+import ModalHeader from "../ModalHeader"; // Asegúrate de tener este componente también
 
-function ModalEliminar({ isOpen, onClose, onConfirmDelete, itemName }) {
+function ModalEliminarTema({ isOpen, onClose, onConfirmDelete, itemName }) {
   const [loading, setLoading] = useState(false); // Estado para manejar la carga
   const [error, setError] = useState(""); // Para manejar posibles errores
 
@@ -35,7 +35,7 @@ function ModalEliminar({ isOpen, onClose, onConfirmDelete, itemName }) {
 
             <div className="px-6 w-full max-md:px-5 max-md:max-w-full">
               <p className="text-lg text-center text-gray-700">
-                ¿Estás seguro de que deseas eliminar la unidad de aprendizaje: <strong>{itemName}</strong>?
+                ¿Estás seguro de que deseas eliminar el módulo seleccionado?: <strong>{itemName}</strong>?
               </p>
             </div>
 
@@ -61,4 +61,4 @@ function ModalEliminar({ isOpen, onClose, onConfirmDelete, itemName }) {
   );
 }
 
-export default ModalEliminar;
+export default ModalEliminarTema;

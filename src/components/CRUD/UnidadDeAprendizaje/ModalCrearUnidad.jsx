@@ -5,11 +5,13 @@ import ModalActions from "../ModalActions";
 import ModalHeader from "../ModalHeader";
 import TextareaField from "../TextareaField";
 
-function ModalesParaCRUD({ isOpen, onClose }) {
+function ModalCrearUnidad({ onClose, isOpen, id }) {
   const [nombre, setNombre] = useState(""); // Estado para el nombre de la unidad
   const [descripcion, setDescripcion] = useState(""); // Estado para la descripción de la unidad
   const [loading, setLoading] = useState(false); // Estado para manejar la carga
   const [error, setError] = useState(""); // Para manejar posibles errores
+  const [setNewUnidad] = useState({});
+
 
   const handleCancel = () => {
     setNombre(""); // Limpiar el nombre
@@ -23,7 +25,7 @@ function ModalesParaCRUD({ isOpen, onClose }) {
       return;
     }
 
-    const UsuarioId = 8;
+    
 
     try {
       setLoading(true);
@@ -33,12 +35,16 @@ function ModalesParaCRUD({ isOpen, onClose }) {
       const response = await API_URL.post("/api/unidades-de-aprendizaje/crear", {
         Nombre: nombre,
         Descripcion: descripcion,
-        UsuarioId: UsuarioId
+        UsuarioId: id
       });
 
-      // Si la respuesta es exitosa, cerramos el modal y actualizamos la lista
+      
       if (response.status === 200) {
-        console.log("Unidad creada exitosamente", response.data);
+
+        const newUnidad = response.data; 
+
+        setNewUnidad((prevUnidades) => [...prevUnidades, newUnidad]);
+        console.log("Unidad creada exitosamente", newUnidad);
         onClose(true); // Cerrar el modal
       }
     } catch (error) {
@@ -60,14 +66,14 @@ function ModalesParaCRUD({ isOpen, onClose }) {
               <form className="w-full max-md:max-w-full">
                 <InputField
                   label="Nombre"
-                  placeholder="Título del módulo"
+                  placeholder="Título del la unidad de aprendizaje"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                 />
 
                 <TextareaField
                   label="Descripción"
-                  placeholder="Agregar una breve descripción de su módulo"
+                  placeholder="Agregar una breve descripción de su unidad de aprendizaje"
                   value={descripcion}
                   onChange={(e) => setDescripcion(e.target.value)}
                 />
@@ -93,4 +99,4 @@ function ModalesParaCRUD({ isOpen, onClose }) {
   );
 }
 
-export default ModalesParaCRUD;
+export default ModalCrearUnidad;

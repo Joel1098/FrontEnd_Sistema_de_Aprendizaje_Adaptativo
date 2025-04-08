@@ -1,6 +1,6 @@
-"use client";
+
 import { useEffect, useState } from "react";
-import ModalEliminar from "../../components/CRUD/ModalEliminar";
+import ModalEliminarModulo from "../../components/CRUD/Modulo/ModalEliminarModulo";
 import ModalesParaCRUD from "../../components/CRUD/Modulo/ModalCrearModulo";
 import API_URL from "../../config/apiConfiguration"; // Asegúrate de que la configuración de la API esté correcta
 import ModuloItem from "./ModuloItem"; // Asegúrate de que este componente esté correctamente importado
@@ -75,8 +75,14 @@ function ModulosList() {
   const handleDeleteModule = async () => {
     try {
       await API_URL.delete(`/api/modulos/eliminar/${moduleToDelete.id}`);
-      setModulos((prevModulos) => prevModulos.filter((module) => module.id !== moduleToDelete.id)); 
-      closeDeleteModal(); 
+      if (response.status == 200){
+
+        setModulos((prevModulos) => prevModulos.filter((module) => module.id !== moduleToDelete.id)); 
+        closeDeleteModal();
+      }else{
+        console.log("No esta recibiendo correctamente el id.");
+      }
+      
     } catch (error) {
       console.error("Error al eliminar el modulo:", error);
     }
@@ -186,11 +192,11 @@ function ModulosList() {
       </ModalesParaCRUD>
 
       {/* Modal de Confirmación de Eliminación */}
-      <ModalEliminar
+      <ModalEliminarModulo
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
         onConfirmDelete={handleDeleteModule}
-        itemName={moduleToDelete?.nombre} // Nombre de la unidad a eliminar
+        itemName={moduleToDelete?.nombre} 
       />
     </section>
   );

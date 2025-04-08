@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import ModalEliminar from "../../components/CRUD/ModalEliminar";
-import ModalesParaCRUD from "../../components/CRUD/Modulo/ModalCrearModulo";
+import ModalEliminar from "../../components/CRUD/Tema/ModalEliminarTema";
+import ModalesParaCRUD from "../../components/CRUD/Tema/ModalCreartTema";
 import API_URL from "../../config/apiConfiguration"; // Asegúrate de que la configuración de la API esté correcta
 import TemaItem from "./TemaItem"; // Asegúrate de que este componente esté correctamente importado
 
@@ -63,24 +63,24 @@ function LearningUnitsList() {
     
       <section className="flex-1 p-8 bg-blue-300 bg-opacity-20">
         <h2 className="mb-5 text-3xl font-semibold text-slate-800">
-          Control de unidades de aprendizaje
+          Control de temas
         </h2>
         <p className="mb-10 text-lg tracking-wide text-gray-500">
-          Administra las unidades de aprendizaje que se encuentran registradas en el sistema.
+          Administra los diferentes temas a registrar en los módulos correspondientes. 
         </p>
   
         {/* Sección para el botón de agregar unidad */}
         <div className="flex justify-between items-center mb-8 max-sm:flex-col max-sm:gap-5">
-          <h3 className="text-2xl font-medium text-black">Unidades de Aprendizaje Registradas</h3>
+          <h3 className="text-2xl font-medium text-black">Temas Registrados</h3>
           <div className="flex gap-5">
             <select className="px-5 py-0 text-lg bg-white rounded h-[51px] text-stone-900 w-[306px] max-sm:w-full">
-              <option>UNIDADES DE APRENDIZAJE</option>
+              <option>Módulos</option>
             </select>
             <button
               onClick={openModal}
               className="text-sm font-bold text-white bg-teal-400 rounded cursor-pointer border-[none] h-[51px] w-[194px]"
             >
-              AGREGAR UNIDAD
+              AGREGAR TEMA
             </button>
           </div>
         </div>
@@ -96,7 +96,7 @@ function LearningUnitsList() {
         {/* Aquí se mapean las unidades de aprendizaje y se muestran en tarjetas */}
         <div className="flex flex-col gap-3">
           {learningUnits.length === 0 ? (
-            <p>No hay unidades de aprendizaje disponibles.</p>
+            <p>No hay temas disponibles.</p>
           ) : (
             learningUnits.map((unit) => (
               <TemaItem
@@ -110,7 +110,7 @@ function LearningUnitsList() {
   
         {/* Modal de Crear Unidad */}
         <ModalesParaCRUD isOpen={isModal} onClose={closeModal}>
-          <h2 className="text-lg font-semibold">Crear Unidad de Aprendizaje</h2>
+          <h2 className="text-lg font-semibold">Crear Tema</h2>
           <form>
             <div className="mt-4">
               <label htmlFor="name" className="block">Nombre</label>
@@ -142,7 +142,7 @@ function LearningUnitsList() {
                 type="submit"
                 className="w-1/3 text-white bg-teal-500 rounded p-2"
               >
-                Crear Unidad
+                Crear Tema
               </button>
             </div>
           </form>

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import ModalEliminar from "../../components/CRUD/ModalEliminar";
-import ModalesParaCRUD from "../../components/CRUD/UnidadDeAprendizaje/ModalCrearUnidad";
+import ModalEliminar from '../../components/CRUD/UnidadDeAprendizaje/ModalEliminar';
+import ModalCrearUnidad from "../../components/CRUD/UnidadDeAprendizaje/ModalCrearUnidad";
 import API_URL from "../../config/apiConfiguration"; // Asegúrate de que la configuración de la API esté correcta
 import LearningUnitItem from "./LearningUnitItem"; // Asegúrate de que este componente esté correctamente importado
 
@@ -111,7 +111,7 @@ function LearningUnitsList() {
         </div>
   
         {/* Modal de Crear Unidad */}
-        <ModalesParaCRUD isOpen={isModal} onClose={closeModal}>
+        <ModalCrearUnidad isOpen={isModal} onClose={closeModal}>
           <h2 className="text-lg font-semibold">Crear Unidad de Aprendizaje</h2>
           <form>
             <div className="mt-4">
@@ -148,7 +148,7 @@ function LearningUnitsList() {
               </button>
             </div>
           </form>
-        </ModalesParaCRUD>
+        </ModalCrearUnidad>
   
         {/* Modal de Confirmación de Eliminación */}
         <ModalEliminar
