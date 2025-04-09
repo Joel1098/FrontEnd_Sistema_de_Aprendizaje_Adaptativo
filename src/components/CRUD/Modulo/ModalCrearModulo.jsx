@@ -6,7 +6,7 @@ import ModalHeader from "../ModalHeader";
 import TextareaField from "../TextareaField";
 
 
-function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
+function CrearModulo({ isOpen, onClose, selectedUnidad }) {
   const [nombre, setNombre] = useState(""); 
   const [descripcion, setDescripcion] = useState(""); 
   const [orden, setOrden] = useState(0);
@@ -30,13 +30,15 @@ function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
     try {
       setLoading(true);
       setError(""); 
-      const response = await API_URL.post("/api/modulos/crear", {
+
+      const temaData = {
         
-        UnidadDeAprendizajeidUnidad: selectedUnidad,
+        UnidadDeAprendizajeidUnidad: parseInt(selectedUnidad),
         Nombre: nombre,
         Descripcion: descripcion,
         OrdenModulo: orden
-      });
+      };
+      const response = await API_URL.post("/api/modulos/crear", temaData);
 
     
       if (response.status === 200) {
@@ -107,4 +109,4 @@ function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
   );
 }
 
-export default ModalesParaCRUD;
+export default CrearModulo;

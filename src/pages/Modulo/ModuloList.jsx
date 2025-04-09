@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
-import ModalEliminarModulo from "../../components/CRUD/Modulo/ModalEliminarModulo";
 import ModalesParaCRUD from "../../components/CRUD/Modulo/ModalCrearModulo";
+import ModalEliminarModulo from "../../components/CRUD/Modulo/ModalEliminarModulo";
 import API_URL from "../../config/apiConfiguration"; // Asegúrate de que la configuración de la API esté correcta
 import ModuloItem from "./ModuloItem"; // Asegúrate de que este componente esté correctamente importado
 
@@ -75,7 +75,8 @@ function ModulosList() {
   const handleDeleteModule = async () => {
     try {
       await API_URL.delete(`/api/modulos/eliminar/${moduleToDelete.id}`);
-      if (response.status == 200){
+      const response = 200;
+      if (response.status) {
 
         setModulos((prevModulos) => prevModulos.filter((module) => module.id !== moduleToDelete.id)); 
         closeDeleteModal();

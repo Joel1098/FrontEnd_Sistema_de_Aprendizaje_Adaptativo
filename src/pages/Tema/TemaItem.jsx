@@ -1,8 +1,8 @@
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
-function TemaItem({ unit, onDelete, onEdit }) {
+function TemaItem({ topic, onDelete, onEdit }) {
   
-  const {nombre, materiales, preguntas} = unit
+  const {nombre, materiales, preguntas} = topic;
 
   return (
     <article className="grid items-center px-0 py-10 bg-white rounded-lg grid-cols-[2fr_1fr_1fr_1fr_2fr_0.5fr] max-md:p-4 max-md:grid-cols-[1.5fr_1fr_1fr_1fr_1.5fr_0.5fr] max-sm:gap-2.5 max-sm:p-2.5 max-sm:grid-cols-[1fr] relative">
@@ -14,7 +14,7 @@ function TemaItem({ unit, onDelete, onEdit }) {
         
         <button
             aria-label="Delete"
-            onClick={() => onEdit(unit)} // Llamamos a onDelete pasando la unidad
+            onClick={() => onEdit(topic)} // Llamamos a onDelete pasando la unidad
             className="ti ti-trash text-2xl cursor-pointer"
           >
             <FaEdit />
@@ -22,7 +22,7 @@ function TemaItem({ unit, onDelete, onEdit }) {
           
           <button
             aria-label="Delete"
-            onClick={() => onDelete(unit)} // Llamamos a onDelete pasando la unidad
+            onClick={() => onDelete(topic)} // Llamamos a onDelete pasando la unidad
             className="ti ti-trash text-2xl cursor-pointer"
           >
             <FaTrashAlt />

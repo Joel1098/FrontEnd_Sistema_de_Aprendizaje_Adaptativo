@@ -71,7 +71,7 @@ function LearningUnitsList() {
       {/* Aquí se mapean las unidades de aprendizaje y se muestran en tarjetas */}
       <div className="flex flex-col gap-3">
         {learningUnits.length === 0 ? (
-          <p>No hay unidades de aprendizaje disponibles.</p>
+          <p>No hay respuestas disponibles.</p>
         ) : (
           learningUnits.map((unit) => (
             <RespuestaItem

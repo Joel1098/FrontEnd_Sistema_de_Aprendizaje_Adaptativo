@@ -6,7 +6,7 @@ import ModalHeader from "../ModalHeader";
 import TextareaField from "../TextareaField";
 
 
-function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
+function CrearRespuesta({ isOpen, onClose, selectedUnidad }) {
   const [nombre, setNombre] = useState(""); // Estado para el nombre de la unidad
   const [descripcion, setDescripcion] = useState(""); // Estado para la descripción de la unidad
   const [orden, setOrden] = useState(0);
@@ -109,4 +109,4 @@ function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
   );
 }
 
-export default ModalesParaCRUD;
+export default CrearRespuesta;

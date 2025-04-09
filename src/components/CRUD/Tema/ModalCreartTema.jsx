@@ -6,13 +6,12 @@ import ModalHeader from "../ModalHeader";
 import TextareaField from "../TextareaField";
 
 
-function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
+function CrearTema({ isOpen, onClose, selectedModulo }) {
   const [nombre, setNombre] = useState(""); // Estado para el nombre de la unidad
   const [descripcion, setDescripcion] = useState(""); // Estado para la descripción de la unidad
-  const [orden, setOrden] = useState(0);
   const [loading, setLoading] = useState(false); // Estado para manejar la carga
   const [error, setError] = useState(""); // Para manejar posibles errores
-  const [setNewModule] = useState({}); // Estado para el nuevo módulo
+  const [setNewTema] = useState({}); 
 
   const handleCancel = () => {
     setNombre(""); // Limpiar el nombre
@@ -20,8 +19,13 @@ function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
     onClose(false); // Cerrar el modal
   };
 
+  
+
   const handleConfirm = async () => {
-    if (!nombre || !orden || !descripcion || !selectedUnidad) {
+    if (!nombre || !descripcion || !selectedModulo) {
+      console.log('nombre:', nombre);
+      console.log('descripcion:', descripcion);
+      console.log('moduloId:', selectedModulo);
       setError("Todos los campos son obligatorios");
       return;
     }
@@ -30,27 +34,35 @@ function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
     try {
       setLoading(true);
       setError(""); // Limpiar errores previos
+      
+      console.log("Datos enviados", {
 
-      // Realizamos la solicitud para crear la unidad de aprendizaje
-      const response = await API_URL.post("/api/modulos/crear", {
-        
-        UnidadDeAprendizajeidUnidad: selectedUnidad,
+        IdModulo: selectedModulo,
         Nombre: nombre,
         Descripcion: descripcion,
-        OrdenModulo: orden
+
       });
+      
+      const response = await API_URL.post("/api/temas/crear", {
+        
+        IdModulo: selectedModulo,
+        Nombre: nombre,
+        Descripcion: descripcion,
+      });
+
+      
 
       // Si la respuesta es exitosa, cerramos el modal y actualizamos la lista
       if (response.status === 200) {
 
-        const newModule = response.data; // Guardamos el nuevo módulo creado
+        const newTema = response.data; // Guardamos el nuevo módulo creado
 
-        setNewModule((prevModulos) => [...prevModulos, newModule]);
-        console.log("Unidad creada exitosamente", newModule);
+        setNewTema((prevTemas) => [...prevTemas, newTema]);
+        console.log("Tema creado exitosamente", newTema);
         onClose(true); // Cerrar el modal
       }
     } catch (error) {
-      setError("Hubo un error al crear la unidad de aprendizaje.");
+      setError("Hubo un error al crear el tema.");
       console.error(error);
     } finally {
       setLoading(false); // Finaliza el estado de carga
@@ -62,28 +74,20 @@ function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
       {isOpen && (
         <section className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
           <article className="overflow-hidden max-w-full bg-white rounded-2xl shadow-xl w-[640px]">
-            <ModalHeader title="Agregar Módulo" onClose={onClose} />
+            <ModalHeader title="Agregar Tema" onClose={onClose} />
 
             <div className="px-6 w-full max-md:px-5 max-md:max-w-full">
               <form className="w-full max-md:max-w-full">
                 <InputField
                   label="Nombre"
-                  placeholder="Título del módulo"
+                  placeholder="Título del tema"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                 />
 
-                  <InputField
-                  label="Orden"
-                  placeholder="Orden del módulo"
-                  value={orden}
-                  onChange={(e) => setOrden(e.target.value)}
-                  type="number"
-                />
-
                 <TextareaField
                   label="Descripción"
-                  placeholder="Agregar una breve descripción de su módulo"
+                  placeholder="Agregar una breve descripción de su tema"
                   value={descripcion}
                   onChange={(e) => setDescripcion(e.target.value)}
                 />
@@ -109,4 +113,4 @@ function ModalesParaCRUD({ isOpen, onClose, selectedUnidad }) {
   );
 }
 
-export default ModalesParaCRUD;
+export default CrearTema;
