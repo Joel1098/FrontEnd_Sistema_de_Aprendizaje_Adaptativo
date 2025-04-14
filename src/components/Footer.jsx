@@ -18,7 +18,7 @@ function Footer() {
 
         <nav className="flex flex-nowwrap gap-7 self-start mt-10 text-2lg tracking-wider text-center max-md:mt-10">
           <a href="#" className="hover:text-white">
-            Modelo de VARK y como funciona
+            Modelo de VARK
           </a>
           <div className="shrink-0 w-px h-6 border border-gray-500 border-solid" />
           <a href="#" className="basis-auto hover:text-white">
