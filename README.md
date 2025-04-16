@@ -13,7 +13,22 @@ FrontEnd para proyecto de Sistema de Aprendizaje Adaptativo, el cuál mostrará 
 
 docker exec -it mysql_dev mysql -u root -p your_root_password
 
-6. Una vez dentro de la base de datos, crear el usuario otorgando todos los privilegios 
+7. Una vez dentro de la base de datos, crear el usuario otorgando todos los privilegios
+
+CREATE USER 'app_user'@'%' IDENTIFIED WITH mysql_native_password BY 'userPass456';
+
+GRANT ALL PRIVILEGES ON SistemaEducativo.* TO 'app_user'@'%' IDENTIFIED BY 'userPass456';
+
+FLUSH PRIVILEGES;
+
+8. Después creado el usuario, salimos de MySQL y realizamos las migraciones con entity framework utilizando el comando:
+
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+
+9. Siempre es recomendable verificar las versiones, por lo que una vez instaladas, revisar versiones de dotnet, mysql y node. 
+
 # Frameworks para estilos CSS
 
 Tailwind CSS, ya está instalada toda la configuración para los estilos. Actualmente en el proyecto ya se puede hacer uso en cualquier parte del código ya que esta configurado de manera global y utilizando un ClassName="".
