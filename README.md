@@ -1,6 +1,19 @@
 # FrontEnd_Sistema_de_Aprendizaje_Adaptativo
 FrontEnd para proyecto de Sistema de Aprendizaje Adaptativo, el cuál mostrará todo el apartado visual que consuma del proyecto BackEnd en .NET y el módulo de optimización con 2 algoritmos como propuesta de solución.
 
+
+# Pasos para poder trabajar el FrontEnd con backend desde MacOS
+
+1. Tener instalado el SDK de .net (de preferencia la versión 8)
+2. Tener Rider, por parte de JetBrains para poder trabajar en un entorno parecido a visual studio 2022.
+3. Descargar el repositorio y trabajar en la rama PruebasUnitarias (de preferencia)
+4. Una vez bajado el repositorio, teniendo docker instalado, realizar un Docker compose-up --build teniendo la carpeta SistemadeAA.Server seleccionada. 
+5. Tener instalado MySQL, puede ser cualquier version(de preferencia version 8)
+6. Conectarse al contenedor docker por medio del comando:
+
+docker exec -it mysql_dev mysql -u root -p your_root_password
+
+6. Una vez dentro de la base de datos, crear el usuario otorgando todos los privilegios 
 # Frameworks para estilos CSS
 
 Tailwind CSS, ya está instalada toda la configuración para los estilos. Actualmente en el proyecto ya se puede hacer uso en cualquier parte del código ya que esta configurado de manera global y utilizando un ClassName="".
